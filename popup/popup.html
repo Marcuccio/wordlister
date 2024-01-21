@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+  <title>Wordlister Extension</title>
+</head>
+<body class="bg-dark text-white">
+
+  <div class="container">
+    
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a id="pathTab" class="nav-link active" href="#">Path</a>
+      </li>
+      <li class="nav-item">
+        <a id="paramTab" class="nav-link" href="#">Parameters</a>
+      </li>
+      <li class="nav-item">
+        <a id="headerTab" class="nav-link" href="#">Headers</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div id="pathContent" class="content mt-4">
+      <div class="counter mb-3">Elements: <span id="pathCounter">0</span></div>
+      <button id="downloadPath" class="btn btn-primary">Download Path Wordlist</button>
+
+      <div class="table-responsive">   
+        <table class="table table-dark table-sm">
+          <thead>
+            <tr>
+              <th>Path</th>
+            </tr>
+          </thead>
+          <tbody id="pathTable"></tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div id="paramContent" class="content mt-4">
+      <div class="counter mb-3">Elements: <span id="paramCounter">0</span></div>
+      <button id="downloadParam" class="btn btn-primary">Download Parameter Wordlist</button>
+
+      <div class="table-responsive">   
+        <table class="table table-dark table-sm">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+            </tr>
+          </thead>
+          <tbody id="paramTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="headerContent" class="content mt-4">
+      <div class="counter mb-3">Elements: <span id="headerCounter">0</span></div>
+      <button id="downloadHeader" class="btn btn-primary">Download Header Wordlist</button>
+
+      <div class="table-responsive">   
+
+        <table class="table table-dark table-sm">
+          <thead>
+            <tr>
+              <th>Header</th>
+            </tr>
+          </thead>
+          <tbody id="headerTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
