@@ -19,5 +19,5 @@ Wordlister is a robust web extension designed to help penetration testers and bu
 
 ### Usage
 
-1. Navigate as you would normally do and `Wordlister` will, passively, build a `seen-in-the-wild` wordlist for you
+1. [TODO] Navigate as you would normally do and `Wordlister` will, passively, build a `seen-in-the-wild` wordlist for you
 2. Download and manage your wordlists directly within the extension popup window.
