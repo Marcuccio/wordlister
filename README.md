@@ -21,7 +21,7 @@ To manually install the Nuclei AI Browser Extension, follow these steps:
 3. Enable the `Developer mode` toggle located in the top right corner of the page.
 4. Click on `Load unpacked` and select the extension folder.
 
-After following these steps, the Nuclei AI Browser Extension will be successfully installed in your Chrome browser.
+After following these steps, the Wordlister Extension will be successfully installed in your Chrome browser.
 
 ## Usage
 
