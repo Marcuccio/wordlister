@@ -16,14 +16,14 @@ Wordlister is a robust web extension designed to help penetration testers and bu
 
 To manually install the Nuclei AI Browser Extension, follow these steps:
 
-1. Download the [zipped extension file]() and unzip it.
+1. Clone the repository.
 2. Open your Chrome browser and navigate to `chrome://extensions`.
 3. Enable the `Developer mode` toggle located in the top right corner of the page.
-4. Click on `Load unpacked` and select the unzipped extension folder.
+4. Click on `Load unpacked` and select the extension folder.
 
 After following these steps, the Nuclei AI Browser Extension will be successfully installed in your Chrome browser.
 
-### Usage
+## Usage
 
 1. Navigate as you would normally do and `Wordlister` will, passively, build a `seen-in-the-wild` wordlist for you
 2. Download and manage your wordlists directly within the extension popup window.
