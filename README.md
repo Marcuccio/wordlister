@@ -10,12 +10,18 @@ Wordlister is a robust web extension designed to help penetration testers and bu
 - **Dynamic Filtering**: [TODO]
 - **IndexedDB Storage**: Save and manage custom wordlists directly within the extension, providing easy access to valuable data during assessments.
 
-## Getting Started
+## Installation
 
-### Installation
+### Manual Install
 
-- [TODO] **Chrome**: Download and install Wordlister from the [Chrome Web Store](link_to_store).
-- [TODO] **Firefox**: Obtain Wordlister from [Firefox Add-ons](link_to_addons).
+To manually install the Nuclei AI Browser Extension, follow these steps:
+
+1. Download the [zipped extension file]() and unzip it.
+2. Open your Chrome browser and navigate to `chrome://extensions`.
+3. Enable the `Developer mode` toggle located in the top right corner of the page.
+4. Click on `Load unpacked` and select the unzipped extension folder.
+
+After following these steps, the Nuclei AI Browser Extension will be successfully installed in your Chrome browser.
 
 ### Usage
 
