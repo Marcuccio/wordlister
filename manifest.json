@@ -1,26 +1,25 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Wordlister",
     "description": "Uses the proxy API to build wordlists.",
-    "version": "2.0",
-
-
-    "browser_action": {
-        "default_icon": "icons/wordlister-256px.ico",
-        "default_title": "Word",
-        "default_popup": "popup/popup.html"
-    },
-
-    "icons": {
-        "48": "icons/wordlister-48x48.png",
-        "96": "icons/wordlister-96x96.png"
-    },
-     
+    "version": "1.0",
+    "author": "marcuccio@protonmail.com",
 
     "background": {
-        "scripts": ["background/background.js"]
+        "service_worker": "background/background.js"
     },
 
-    "permissions": ["webRequest", "storage", "<all_urls>"]
+    "permissions": ["webRequest", "storage", "activeTab"],
+    "host_permissions": [
+        "http://*/*", "https://*/*"
+    ],
 
+    "action": {
+        "default_icon": {
+            "48": "icons/wordlister-48x48.png",
+            "96": "icons/wordlister-96x96.png"
+        },
+        "default_title": "Word",
+        "default_popup": "popup/popup.html"
+    }
 }

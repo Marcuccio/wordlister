@@ -1,3 +1,7 @@
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 let db;
 
 const db_name = 'wordlister_data_db';
@@ -175,7 +179,7 @@ function on_headers_received(details) {
   }
 }
 
-const DBOpenRequest = window.indexedDB.open(db_name);
+const DBOpenRequest = indexedDB.open(db_name);
 
 DBOpenRequest.onsuccess = (event) => {
     db = DBOpenRequest.result;
