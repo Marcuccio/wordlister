@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
         const a = document.createElement('a');
         a.href = url;
-        a.download = `wordlister_${storeName}_keys.txt`;
+        a.download = `wordlister-${storeName}.txt`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
