@@ -2,7 +2,7 @@
 
 Wordlister is a robust web extension designed to help penetration testers and bug bounty hunters build custom wordlists during their daily internet activities. This tool provides a seamless experience for crafting personalized wordlists based on specific targets encountered during security assessments and casual browsing.
 
-![Wordlister Logo or Screenshot](link_to_your_image.png)
+![Wordlister Logo or Screenshot](icons/wordlister-48x48.png)
 
 ## Features
 
