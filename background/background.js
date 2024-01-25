@@ -9,6 +9,7 @@ const db_storeName_param = 'param';
 const db_storeName_path = 'path';
 const db_storeName_header = 'header';
 
+const forbidden_resource_types = ["font", "image", "imageset", "media", "stylesheet", "xml_dtd"];
 
 // Filter out paths with specific extensions
 const forbidden_extensions = [
@@ -21,8 +22,8 @@ const forbidden_extensions = [
     '.jsp', '.php', '.asp', '.aspx'
 ];
 
-const common_headers = 
-    ["accept", "accept-charset", "accept-encoding",
+const common_headers = [
+    "accept", "accept-charset", "accept-encoding",
     "accept-language", "accept-ranges", "authorization",
     "cache-control", "connection", "content-encoding",
     "content-language", "content-length", "content-location",
@@ -62,15 +63,31 @@ const entropy = str => {
       }, 0);
   };
 
-function get_uncommon_pathname(url) {
-    if (!url) {
+function extract_first_level_domain(url) {
+    const full_domain = url.host;
+    const domain_parts = full_domain.split(".");
+    return  domain_parts[domain_parts.length - 2];
+}
+
+function get_uncommon_pathname(details) {
+
+    if (!details.url) {
         return "";
     }
 
-    const pathname = new URL(url).pathname;
+    const url = new URL(details.url);
+    const pathname = url.pathname;
+
+    if (pathname.includes('=')) {
+        return "";
+    }
+    
+    const first_level_hostname = extract_first_level_domain(url);
+    if (pathname.includes(first_level_hostname)) {
+        return "";
+    }
 
     const extension = pathname.slice(pathname.lastIndexOf('.')).toLowerCase();
-
     if (forbidden_extensions.includes(extension)) {
         return "";
     }
@@ -81,7 +98,6 @@ function get_uncommon_pathname(url) {
 
     return pathname;
 }
-
 
 function get_search_params(url) {
 
@@ -104,26 +120,30 @@ function get_search_params(url) {
 
 function add_to_object_store(db_store_name, data) {
 
-  if (!data) {
-      console.warn('data is undefined. Skipping.');
-      return;
-  }
+    if (!data) {
+        console.warn('data is undefined. Skipping.');
+        return;
+    }
 
-  let transaction = db.transaction(db_store_name, 'readwrite');
-  let objectStore = transaction.objectStore(db_store_name);
+    let transaction = db.transaction(db_store_name, 'readwrite');
+    let objectStore = transaction.objectStore(db_store_name);
 
-  if (Array.isArray(data)) {
-      for (const item of data) {
+    if (Array.isArray(data)) {
+        for (const item of data) {
         objectStore.add(item);
-      }
-  } else {
-    objectStore.add(data);
-  }
+        }
+    } else {
+        objectStore.add(data);
+    }
 }
 
 function on_before_send_headers(details) {
 
-    const uncommon_path = get_uncommon_pathname(details.url)
+    if (forbidden_resource_types.includes(details.type)) {
+        return;
+    }
+
+    const uncommon_path = get_uncommon_pathname(details)
 
     if (uncommon_path !== "") {
         add_to_object_store(db_storeName_path, 
@@ -164,19 +184,24 @@ function on_before_send_headers(details) {
 }
 
 function on_headers_received(details) {
-  if (details.responseHeaders) {
 
-    const uncommon_headers= get_uncommon_headers(details.requestHeaders).map(header => ({
-        'name': header,
-        'first_seen_at': details.url,
-        'first_seen': new Date().toISOString()
-    }));;
-
-    if (uncommon_headers.length) {
-        add_to_object_store(db_storeName_header, uncommon_headers);
+    if (forbidden_resource_types.includes(details.type)) {
+        return;
     }
-    
-  }
+
+    if (details.responseHeaders) {
+
+        const uncommon_headers= get_uncommon_headers(details.requestHeaders).map(header => ({
+            'name': header,
+            'first_seen_at': details.url,
+            'first_seen': new Date().toISOString()
+        }));;
+
+        if (uncommon_headers.length) {
+            add_to_object_store(db_storeName_header, uncommon_headers);
+        }
+
+    }
 }
 
 const DBOpenRequest = indexedDB.open(db_name);
